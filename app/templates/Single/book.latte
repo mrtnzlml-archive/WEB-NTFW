@@ -1,0 +1,28 @@
+{**	
+ * Book template.
+ *
+ * @copyright  Copyright (c) 2012 Martin Zlámal
+ *
+ * @param object   $book - objekt book
+ *}
+
+{block content}
+
+<img class="velkaKniha" src="{$basePath}/books/big/{$book->md5obrazku}_b.png" alt="náhled" />
+<h2>{$book->nazevKnihy}</h2>
+<div class="price">{$book->cenaKnihy} {!$mena} <a n:href="add!"><img src="{$basePath}/images/addcart.png" alt="do košíku" /></a></div>
+<p>{$book->popisKnihy}</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'knihkupectvi';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+{/block}

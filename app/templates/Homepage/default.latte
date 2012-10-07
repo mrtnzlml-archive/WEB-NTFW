@@ -1,0 +1,40 @@
+{**	
+ * Default template.
+ *
+ * @copyright  Copyright (c) 2012 Martin Zlámal
+ *
+ * @param object   $lastBooks - 15 (limit) last books
+ *}
+
+{block content}
+{*cache*}
+<div id="categories">
+	<ul>
+		<li n:foreach="$categories as $cat">
+			<a n:href="Single:category $cat->category">{$cat->category}</a>
+		</li>
+	</ul>
+</div>
+{*/cache*}
+<div id="books">
+	<div class="malyNahled" n:foreach="$lastBooks as $book">
+		<a n:href="Single:book $book->id">
+			{if file_exists("books/small/".$book->md5obrazku."_s.png")}
+				<img class="malaKniha" src="{$basePath}/books/small/{$book->md5obrazku}_s.png" alt="náhled" />
+			{else}
+				<img class="malaKniha" src="{$basePath}/images/image.png" alt="náhled" />
+			{/if}
+			<b>{$book->nazevKnihy}</b>
+		</a>
+		<div class="price">
+			{$book->cenaKnihy} {!$mena} 
+			{if $user->isAllowed('shop', 'use')}
+				<a n:href="add! $book->id"><img src="{$basePath}/images/addcart.png" alt="do košíku" /></a>
+			{/if}
+		</div>
+		{*<p>{$book->popisKnihy|truncate:200}</p>*}
+	</div>
+</div>
+<div id="paginator">{control vp}</div>
+
+{/block}

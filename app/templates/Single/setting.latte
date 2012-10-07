@@ -1,0 +1,15 @@
+{block content}
+{if $user->isAllowed('setting', 'enter')}
+
+<div style="float:left;">
+	{control settingForm}
+</div>
+
+<div style="float:left;margin:20px 50px">
+	<img src="{$basePath}/images/reg.png" alt="registration" />
+</div>
+
+{else}
+Nemáte dostatečná oprávnění pro vstup na tuto stránku!
+{/if}
+{/block}

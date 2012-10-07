@@ -1,0 +1,64 @@
+{block content}
+{if $user->isAllowed('administration', 'enter')}
+
+<div class="tabs">
+	<ul class="tabNavigation" style="margin:0;">
+		<li><a href="#first">Nový produkt</a></li>
+		<li><a href="#second">Objednávky</a></li>
+		<li><a href="#third">Globální nastavení</a></li>
+		<li><a href="#fourth">Editace produktu</a></li>
+	</ul>
+	<div id="first">
+		<h2>Nový produkt</h2>
+		<p>Následujícím formulářem vložíte nový produkt. Nahrajte obázek, napište název knihy, popis, její cenu a zvolte kategorii knihy.</p>
+		{control addForm}
+		<p class="error">TODO: měna, kategorie/podkategorie, autor, další info o knize...</p>
+	</div>
+	<div id="second">
+		<h2>Objednávky</h2>
+		<p class="error">Přehled objednávek, jejich potvrzení a manuální vyřízení...</p>
+	</div>
+	<div id="third">
+		<h2>Globální nastavení</h2>
+		{control settingForm}
+		<p class="error">Měna, DPH, kategorie, podktagore atd...</p>
+	</div>
+	<div id="fourth">
+		<h2>Editace produktu</h2>
+		<p class="error">Smazání a úpravy produktu...</p>
+	</div>
+</div>
+
+{else}
+Nemáte dostatečná oprávnění pro vstup na tuto stránku!
+{/if}
+{/block}
+
+
+
+
+{block head}
+<style>
+ul.tabNavigation { list-style: none; margin: 0; padding: 0; }
+ul.tabNavigation li { display: inline; font-size: 18px; line-height: 15px; }
+ul.tabNavigation li a { padding: 10px; background-color: #92907a; text-decoration: none; }
+ul.tabNavigation li a.selected,
+ul.tabNavigation li a:hover { background-color: #434230; color: white; }
+ul.tabNavigation li a:focus { outline: 0; }
+div.tabs > div { padding: 5px; margin-top: 3px; }
+div.tabs > div h2 { margin-top: 0; }
+</style>
+<script>
+$(function () {
+	var tabContainers = $('div.tabs > div');
+	tabContainers.hide().filter(':first').show();
+	$('div.tabs ul.tabNavigation a').click(function () {
+		tabContainers.hide();
+		tabContainers.filter(this.hash).show();
+		$('div.tabs ul.tabNavigation a').removeClass('selected');
+		$(this).addClass('selected');
+		return false;
+	}).filter(':first').click();
+});
+</script>
+{/block}

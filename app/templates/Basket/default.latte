@@ -1,0 +1,34 @@
+{**	
+ * Basket-firstPage template.
+ *
+ * @copyright  Copyright (c) 2012 Martin Zlámal
+ *
+ * @param array    $books - books in basket
+ *}
+
+{block content}
+
+<div><b>Obsah košíku</b> > Doprava a platba > Dodací údaje > Poslední kontrola</div>
+
+{ifset $books}
+<table>
+{var $suma = 0}
+{foreach $books as $book}
+	<tr>
+		<td><b><a n:href="Single:book $book->id">{$book->nazevKnihy}</a></b></td>
+		<td><div class="price">{$book->cenaKnihy} {!$mena}</div></td>
+		{var $suma += $book->cenaKnihy}
+	</tr>
+{/foreach}
+	<tr>
+		<td>Celková cena</td>
+		<td>{$suma} {!$mena}</td>
+	</tr>
+</table>
+<a n:href="Basket:dopravaPlatba">Další krok objednávky ></a>
+{/ifset}
+
+<br /><br /><br /><a n:href="unset!" class="error">Vymazat obsah košíku</a>
+<p class="error">TODO: počet počtu položky, delete položky...</p>
+
+{/block}
